@@ -41,7 +41,7 @@ class GlowingLabel(QLabel):
         self.animation.setStartValue(QColor(255, 255, 255))
         self.animation.setEndValue(QColor(255, 0, 0))
         self.animation.setDuration(5000)
-        self.animation.setLoopCount(-1)  # 循环无限次
+        self.animation.setLoopCount(-1) 
         self.animation.start()
 
     @pyqtProperty(QColor)
@@ -58,7 +58,7 @@ class GlowingLabel(QLabel):
 class InfoModule(QWidget):
     def __init__(self, main_program, label_name, gradient_start, gradient_end):
         super().__init__()
-        self.main_program = main_program  # 保存 main_program 作为属性
+        self.main_program = main_program  
         self.label_name = label_name
 
         self.title = label_name
@@ -109,8 +109,8 @@ class InfoModule(QWidget):
 #     '気流': 'Wind_Speed',
 #     'PMV': 'PMV',
 #     '二酸化炭素': 'co2',
-#     '空調の設定温度': 'Set_Point',  # 需要你确认并提供实际列名
-#     '空調消費量予測': 'HVAC_Consumption',  # 需要你确认并提供实际列名
+#     '空調の設定温度': 'Set_Point',  
+#     '空調消費量予測': 'HVAC_Consumption', 
 #     'PM2.5': 'pm25',
 #     'PM10': 'pm10',
 # }
@@ -123,8 +123,8 @@ LABEL_TO_DB_COLUMN_MAPPING = {
     'Wind Speed': 'Wind_Speed',
     'PMV': 'PMV',
     'CO2': 'co2',
-    'AC set temperature': 'Set_Point',  # 需要你确认并提供实际列名
-    'Energy Consumption Prediction': 'HVAC_Consumption',  # 需要你确认并提供实际列名
+    'AC set temperature': 'Set_Point',  
+    'Energy Consumption Prediction': 'HVAC_Consumption',  
     'PM2.5': 'pm25',
     'PM10': 'pm10',
 }
@@ -159,14 +159,14 @@ class TrendDialog(QDialog):
     def fetch_and_plot_data(self):
         data = self.get_label_data(self.label_name)
 
-        # 将字符串时间戳转换为datetime对象
+    
         timestamps = [datetime.strptime(item['timestamp'], "%Y/%m/%d %H:%M:%S") for item in data]
         values = [item['value'] for item in data]
 
-        # Plotting the data
+    
         self.ax.plot(timestamps, values)
 
-        # 设置X轴的刻度和标签
+
         self.ax.xaxis.set_major_locator(HourLocator())
         self.ax.xaxis.set_major_formatter(DateFormatter('%H:%M'))
 
@@ -174,12 +174,12 @@ class TrendDialog(QDialog):
         self.ax.set_xlabel('Time (hours)')
         self.ax.set_ylabel('Value')
 
-        # 为了更好的显示，您可以选择旋转X轴的标签
+      
         plt.setp(self.ax.xaxis.get_majorticklabels(), rotation=45)
 
         self.canvas.draw()
 
-    def get_label_data(self, label_name):  # 注意这里我们添加了 self 参数
+    def get_label_data(self, label_name):  
         connection = pymysql.connect(
             host=MYSQL_HOST,
             user=MYSQL_USER,
@@ -191,7 +191,7 @@ class TrendDialog(QDialog):
         label_data = []
         try:
             with connection.cursor() as cursor:
-                # 确保此查询是针对正确的表进行的，并且选择了正确的列
+            
                 sql = f"SELECT Time, {db_column_name} FROM raspberry_mqtt5 WHERE Time >= NOW() - INTERVAL 1 DAY"
                 cursor.execute(sql)
                 result = cursor.fetchall()
@@ -307,7 +307,7 @@ class LoginDialog(QDialog):
 
         self.form_layout.addRow( username_label, self.entry_username)
 
-        # 密码输入框
+
         self.entry_password = QLineEdit()
         self.entry_password.setEchoMode(QLineEdit.Password)
         self.entry_password.setFont(self.form_font)
@@ -315,19 +315,19 @@ class LoginDialog(QDialog):
 
         self.layout.addLayout(self.form_layout)
 
-        # Create the notion label
+     
         self.Notion_label = QLabel("***システム番号と位置は作成ページを参照 2023 Sumiyoshi Lab. All Rights Reserved*** ")
         self.Notion_label.setFont(QtGui.QFont('UD デジタル 教科書体 N-B', 10))
         self.Notion_label.setAlignment(Qt.AlignCenter)
 
-        # Create a layout for the notion label (in case you want to add more widgets alongside it in the future)
+      
         self.notion_layout = QHBoxLayout()
         self.notion_layout.addWidget(self.Notion_label)
 
-        # Add the notion layout to the main layout
+      
         self.layout.addLayout(self.notion_layout)
 
-        # 登录按钮
+
         self.login_button = QPushButton("登録")
         button_font = QFont('UD デジタル 教科書体 N-B', 15)
 
@@ -335,24 +335,23 @@ class LoginDialog(QDialog):
         self.login_button.setFont(button_font)
         self.login_button.clicked.connect(self.login)
 
-        # 注册按钮
+   
         self.signin_button = QPushButton("アカウントを作る")
         self.signin_button.setFont(button_font)
         self.signin_button.clicked.connect(self.signin)
 
-        # 创建一个水平布局并将两个按钮添加到布局中
         button_layout = QHBoxLayout()
         button_layout.addWidget(self.login_button)
         button_layout.addWidget(self.signin_button)
 
-        # 将按钮布局添加到主布局中
+ 
         self.layout.addLayout(button_layout)
         self.system_position_combobox = QComboBox()
         positions = ['部屋番号をご選んでください',"位置1", "位置2", "位置3", "位置4",'位置5']  # 可以替换为您想要的系统位置
         self.system_position_combobox.addItems(positions)
         self.system_position_combobox.setFont(QtGui.QFont('UD デジタル 教科書体 N-B', 15))
         self.layout.addWidget(self.system_position_combobox)
-        # 将布局设置为窗口的主布局
+        
         self.setLayout(self.layout)
 
     def login(self):
@@ -468,15 +467,15 @@ class RegisterDialog(QDialog):
 
         self.layout.addLayout(self.form_layout)
 
-        # 添加图片对话框按钮
+ 
         self.image_button = QPushButton("システムの位置")
         self.image_button.setFont(QtGui.QFont('UD デジタル 教科書体 N-B', 15))
         self.image_button.clicked.connect(self.show_image_dialog)
         self.layout.addWidget(self.image_button)
 
-        # 添加系统位置选择
+ 
         self.system_position_combobox = QComboBox()
-        positions = ["位置1", "位置2", "位置3", "位置4",'位置5']  # 可以替换为您想要的系统位置
+        positions = ["位置1", "位置2", "位置3", "位置4",'位置5']  
         self.system_position_combobox.addItems(positions)
         self.system_position_combobox.setFont(QtGui.QFont('UD デジタル 教科書体 N-B', 15))
         self.layout.addWidget(self.system_position_combobox)
@@ -511,7 +510,7 @@ class RegisterDialog(QDialog):
         email = self.entry_email.text()
         system_position = self.system_position_combobox.currentText()
 
-        # Check if the username is available
+        
         if not self.is_username_available(username):
             msg = QMessageBox(self)
             msg.setWindowTitle("ユーザー名が取られています")
@@ -525,22 +524,20 @@ class RegisterDialog(QDialog):
         payload = f"{username},{password},{email},{system_position}"
 
         # Send to MQTT server
-        broker_address = "broker.emqx.io"
-        broker_address = "broker.hivemq.com"
-        client = mqtt_client.Client("chenyutong")  # 使用一个唯一的客户端ID
-        client.username_pw_set("emqx", "public")  # 设置MQTT的用户名和密码
+        broker_address = "#########"
+        client = mqtt_client.Client("#########")  # 使用一个唯一的客户端ID
+        client.username_pw_set("###########", "########")  # 设置MQTT的用户名和密码
         client.connect(broker_address, 1883)  # 通常MQTT使用1883端口
         client.publish("raspberry/UserID", payload)
-        time.sleep(2)  # wait for 2 seconds to ensure message is published
-        client.disconnect()  # Disconnect from the MQTT broker
+        time.sleep(2)  
+        client.disconnect() 
 
         self.accept()
         self.close()
 
-        # 重新启动应用程序
+
         os.execv(sys.executable, ['BI-Tech.py'] + sys.argv)
-        # 重新启动应用程序
-        # os.startfile('BI-Tech.exe')
+   
         os._exit(0)
 
     def back_to_login(self):
@@ -588,7 +585,7 @@ class ProfileDialog(QDialog):
         self.logo_label.setAlignment(Qt.AlignCenter)
         self.layout.addWidget(self.logo_label)
 
-        # Fetch user data
+    
         user_data = self.fetch_user_data()
 
         # Assuming user_data is a dictionary with keys 'username', 'score', etc.
@@ -834,24 +831,21 @@ class VoteDialog(QWidget):
         print(f"Vote recorded: {vote_value} at {vote_time}")
         print(f"Data published to topic: {topic}")
 
-        # Show a thank you message
-        # 创建消息框
+
         msg_box = QMessageBox(self)
         msg_box.setWindowTitle("ありがとうございます！")
         msg_box.setText("投票していただきありがとうございます！")
 
-        # 设置消息框的字体
         font = QtGui.QFont('UD デジタル 教科書体 NK-R', 15)
         msg_box.setFont(font)
 
-        # 显示消息框
+   
         msg_box.exec_()
 
-        # Close the voting window
         self.close()
 
     def show_vote_reminder(self):
-        # 发送通知
+
         notification.notify(
             title="快適性はどうですか",
             message="BI-Techに快適性を投票しましょう！",
@@ -861,10 +855,10 @@ class VoteDialog(QWidget):
 
     def toggle_vote_dialog(self, state):
         if state == Qt.Checked:
-            # Start the timer to show the VoteDialog every hour
+
             self.vote_timer.start(3600000)
         else:
-            # Stop the timer
+
             self.vote_timer.stop()
 
 
@@ -898,22 +892,22 @@ class LabelSelectorDialog(QDialog):
         category_font.setUnderline(True)
 
 
-        # Initialize a QFont for the checkboxes
+    
         checkbox_font = QFont("UD デジタル 教科書体 N-B", 15)
 
-        # List of labels for each category
+      
         environment_labels = ['Indoor Air Temperature', 'Globe Temperature', 'Air Pressure', 'Relative Humidity', 'Mean Radiant Temperature', 'Wind Speed', 'PMV']
         air_quality_labels = ['CO2', 'PM2.5', 'PM10']
         energy_consumption_labels = ['AC set temperature', 'Energy Consumption Prediction']
 
-        # Create a dictionary to group the labels
+      
         label_groups = {
             '環境情報': environment_labels,
             '空気質': air_quality_labels,
             'エネルギー消費': energy_consumption_labels
         }
 
-        # Create checkboxes for each category
+      
         self.checkbox_dict = {}
         for category, labels in label_groups.items():
             # Add a category label
@@ -922,7 +916,7 @@ class LabelSelectorDialog(QDialog):
             category_label.setAlignment(Qt.AlignCenter)
             category_label.setStyleSheet("color: blue;")
 
-            # Set tooltips for each category
+          
             if category == '環境情報':
                 category_label.setToolTip(
                     "このカテゴリは、部屋や建物の内部環境を示すさまざまなパラメータに関連しています。<br>室内温度、放射温度、湿度などの要因は、人間の快適さや健康に大きく影響します。")
@@ -933,7 +927,7 @@ class LabelSelectorDialog(QDialog):
                 category_label.setToolTip(
                     "エネルギー消費の指標は、家電製品やシステムが使用しているエネルギーの量に関する洞察を提供します。<br>これらを監視することで、エネルギー効率と持続可能性を実現するのに役立ちます。")
 
-            # Add the category_label to the layout AFTER setting the tooltip
+           
             self.layout.addWidget(category_label)
 
             for label_name in labels:
@@ -944,7 +938,7 @@ class LabelSelectorDialog(QDialog):
                 self.layout.addWidget(checkbox)
                 checkbox.stateChanged.connect(self.toggle_info_module)
 
-        # 确定和取消按钮
+       
         self.buttons_layout = QHBoxLayout()
         self.profile_logout_button_layout = QHBoxLayout()
         self.ok_button = QPushButton("はい")
@@ -955,36 +949,30 @@ class LabelSelectorDialog(QDialog):
         self.cancel_button.clicked.connect(self.reject)
         self.ok_button.clicked.connect(self.on_ok_clicked)
         self.register_dialog = RegisterDialog()
-        # self.profile_button = QPushButton("プロフィール")
-        # self.profile_button.setFont(QFont("UD デジタル 教科書体 N-B", 15))
-        # self.profile_button.clicked.connect(self.show_profile)
+
         self.profile_button = QPushButton()
-        # Set the image as an icon
+
         icon1 = QIcon('Fig/p.png')
         self.profile_button.setIcon(icon1)
-        # Set the size of the icon (You can adjust these values as needed)
-        self.profile_button.setIconSize(QSize(20, 20))  # Example size
-        # Connec the button's clicked signal
+
+        self.profile_button.setIconSize(QSize(20, 20)) 
+
         self.profile_button.clicked.connect(self.show_profile)
-          # Connect to the show_login_dialog method of the main program
-        # Set the image as an icon
+
         self.logout_button = QPushButton()
         icon2 = QIcon('Fig/logout.png')
         self.logout_button.setIcon(icon2)
-        # Set the size of the icon (You can adjust these values as needed)
+
         self.logout_button.setIconSize(QSize(20, 20))  # Example size
-        # Connec the button's clicked signal
+
         self.logout_button.clicked.connect(self.main_program.show_login_dialog)
-        # For the profile_button
+
         self.profile_button.setStyleSheet("background: transparent; border: black;")
 
-        # For the logout_button
+
         self.logout_button.setStyleSheet("background: transparent; border: black;")
 
-        # self.logout_button = QPushButton("ログアウト")
-        # self.logout_button.setFont(QFont("UD デジタル 教科書体 N-B", 15))
-        # self.logout_button.clicked.connect(
-        #     self.main_program.show_login_dialog)
+
         self.buttons_layout.addWidget(self.ok_button)
         self.buttons_layout.addWidget(self.cancel_button)
         self.profile_logout_button_layout.addWidget(self.profile_button)
@@ -994,7 +982,7 @@ class LabelSelectorDialog(QDialog):
         self.setLayout(self.layout)
 
     def toggle_info_module(self):
-        # 根据选择框的状态更新主窗口的info_modules的可见性
+
         for label_name, checkbox in self.checkbox_dict.items():
             self.main_program.info_modules[label_name].setVisible(checkbox.isChecked())
 
@@ -1022,22 +1010,22 @@ class ScreenReminder(QObject):
     reminderSignal = pyqtSignal(str)
 
     def __init__(self):
-        super().__init__()  # Fixed the typo here from __int__ to __init__
+        super().__init__()  
 
-        # Initialize member variables
+
         self.last_active_time = time.time()
         self.last_wake_time = time.time() - (win32api.GetTickCount() / 1000.0)
         self.max_idle_seconds = 15*60
         self.reminder_threshold = 1800
         self.user_away_time = 0
 
-        # Start listeners for mouse and keyboard activities
+
         self.mouse_listener = mouse.Listener(on_move=self.on_move, on_click=self.on_click, on_scroll=self.on_scroll)
         self.keyboard_listener = keyboard.Listener(on_press=self.on_key_press)
         self.mouse_listener.start()
         self.keyboard_listener.start()
 
-        # Start the QTimer to check user activity periodically
+
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.check_activity)
         self.timer.start(1000)
@@ -1081,9 +1069,7 @@ class ScreenReminder(QObject):
             if self.user_away_time > self.reminder_threshold:
                 self.reminderSignal.emit(
                     f"席を離れてから30分が経過しました")
-            # if self.user_away_time > self.reminder_threshold:
-            #     self.reminderSignal.emit(
-            #         f"Screen has not been in use for: {time.strftime('%H:%M:%S', time.gmtime(self.user_away_time))}")
+
 
 
 
@@ -1106,7 +1092,7 @@ class behavior_report(QDialog):
         self.layout = QVBoxLayout()
         self.grid_layout = QGridLayout()
 
-        # Create 18 buttons and add them to the grid
+
         self.image_buttons = []
         for i in range(18):
             btn = QPushButton()
@@ -1120,12 +1106,12 @@ class behavior_report(QDialog):
 
         self.layout.addLayout(self.grid_layout)
 
-        # Display total score
+
         self.score_label = QLabel(f"Point: {self.total_score}")
         self.score_label.setFont(QFont("UD デジタル 教科書体 N-B", 15))
         self.layout.addWidget(self.score_label)
 
-        # Add a button for final reporting
+
         self.report_button = QPushButton("Report")
         self.report_button.setFont(QFont("UD デジタル 教科書体 N-B", 15))
         self.ranking_button = QPushButton("Points Ranking!")
@@ -1145,7 +1131,7 @@ class behavior_report(QDialog):
         print(f"After add_score, username: {self.username}")
 
     def show_cherry_blossom(self):
-        # List all files in the "cherry" directory
+
         gif_files = [f for f in os.listdir('cherry') if f.endswith('.gif')]
 
         if gif_files:
@@ -1165,7 +1151,7 @@ class behavior_report(QDialog):
         gif_label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         gif_label.setAlignment(Qt.AlignCenter)
 
-        # Keeping the QMovie object alive by making it a class attribute
+
         self.movie = QMovie(gif_path)
         self.movie.setScaledSize(QSize(480, 480))  # Adjust this value if needed
         self.movie.setCacheMode(QMovie.CacheAll)
@@ -1221,17 +1207,17 @@ class behavior_report(QDialog):
             print("There was an error connecting to the API.")
 
     def display_rankings(self):
-        # Set font for the rankings text
+
         font = QFont("UD デジタル 教科書体 N-B", 20)  # Increase font size to 20
         QApplication.instance().setFont(font)
 
-        # Create a custom QDialog for displaying the rankings
+
         rankings_dialog = QDialog(self)
         rankings_dialog.setWindowTitle("Points Ranking!")
         rankings_dialog.setFixedSize(600, 800)  # Increase the dialog size
         layout = QVBoxLayout()
 
-        # Add the centered image at the top
+
         logo_label = QLabel()
         pixmap = QPixmap('Fig/ranking.png')
         logo_label.setPixmap(pixmap.scaled(100, 100, Qt.KeepAspectRatio))
@@ -1273,23 +1259,22 @@ class MainProgram(QWidget):
         self.font = QtGui.QFont('UD デジタル 教科書体 NK-R', 15)  # you can adjust the size as needed
         self.setFont(self.font)
 
-        # Define the input features and target variable
+
         self.input_features = ['Ta', 'Tg', 'P', 'RH', 'MRT', 'Vair', 'PMV', 'Set-Point', 'Tout']
         self.target_variable = 'W(Outdoor)'
 
-        # Load the dataset
         df = pd.read_csv('ML/ML.csv')
 
-        # Splitting the data into training and testing sets
+
         X_train, _, y_train, _ = train_test_split(
             df[self.input_features], df[self.target_variable], test_size=0.2, random_state=42
         )
 
-        # Scaling the features
+
         self.scaler = StandardScaler()
         X_train_scaled = self.scaler.fit_transform(X_train)
 
-        # Initializing and training the Random Forest model with best parameters
+
         self.rf_model = RandomForestRegressor(
             n_estimators=200, max_depth=15, max_features='sqrt', min_samples_leaf=1, min_samples_split=2,
             random_state=42
@@ -1304,10 +1289,10 @@ class MainProgram(QWidget):
         self.new_mqtt_message.connect(self.update_info)
         self.initUI()
 
-        # Show login dialog on startup
+
         self.show_login_dialog()
 
-        #
+
         # # Create vote button and checkbox
         # self.vote_button = QPushButton("快適度に投票しましょう")
         # self.vote_button.setFont(QFont("UD デジタル 教科書体 N-B", 15))
@@ -1315,33 +1300,30 @@ class MainProgram(QWidget):
         # self.vote_checkbox = QCheckBox("1時間ごとに投票ダイアログを表示する")
         # self.vote_checkbox.stateChanged.connect(self.toggle_vote_dialog)
 
-        # 创建一个水平布局以保持复选框和图像标签
+
         grid = QGridLayout()
 
-        # 将 setting_button 加入到第0行、第0列
+
         self.setting_button = QPushButton()
         self.setting_button.setIcon(QIcon("Fig/background_3.png"))
         self.setting_button.setIconSize(QSize(25, 25))
         self.setting_button.clicked.connect(self.show_label_selector)
         grid.addWidget(self.setting_button, 0, 0)
 
-        # 将 time 标签加入到第0行、第1列
         self.time = QtWidgets.QLabel("Time")
         self.time.setFont(QtGui.QFont('Arial', 15))
         self.time.setAlignment(Qt.AlignCenter)
         grid.addWidget(self.time, 0, 1)
 
-        # 将 image_label 加入到第0行、第2列
+
         image_label = QLabel()
         pixmap3 = QPixmap("Fig/background_4.png")
         image_label.setPixmap(pixmap3.scaled(280, 280, Qt.KeepAspectRatio))
         grid.addWidget(image_label, 0, 2)
 
-        # 将网格布局添加到主布局中
         self.layout.addLayout(grid)
 
 
-        # Start a timer to update the time every second
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_time)
         self.timer.start(1000)
@@ -1372,7 +1354,7 @@ class MainProgram(QWidget):
         self.title.setAlignment(QtCore.Qt.AlignCenter)  # Center align the text
         self.title.setStyleSheet("color:#F9AA33;")
 
-          # Center align the text
+
 
         layout = QtWidgets.QVBoxLayout()
         layout.addWidget(self.title)
@@ -1509,18 +1491,17 @@ class MainProgram(QWidget):
         trend_dialog.exec_()
 
     def rearrange_info_modules(self):
-        # 清除当前的布局内容
+
         for i in reversed(range(self.info_layout.count())):
             widget = self.info_layout.itemAt(i).widget()
             if widget is not None:
                 self.info_layout.removeWidget(widget)
-                widget.hide()  # 隐藏此控件
+                widget.hide() 
 
-        # 获取所有选中的InfoModule，并添加到一个列表中
         selected_modules = [module for label_name, module in self.info_modules.items() if
                             self.checkbox_dict[label_name].isChecked()]
 
-        # 按照网格布局重新排列选中的InfoModule
+
         row, col = 0, 0
         for module in selected_modules:
             self.info_layout.addWidget(module, row, col)
@@ -1758,20 +1739,17 @@ class MainProgram(QWidget):
         pass
 
     def handleUserAway(self, message):
-        # Handle the userAwaySignal
+
         self.last_away_message = message
-        # 在此处处理 message，例如显示一个QMessageBox
-        # 创建消息框
+
         msg_box = QMessageBox(self)
         msg_box.setWindowTitle("Notification")
         msg_box.setText(message)
 
-        # 设置消息框的字体
+
         font = QtGui.QFont('UD デジタル 教科書体 NK-R', 15)
         msg_box.setFont(font)
 
-        # 显示消息框
-        # msg_box.exec_()
 
         notification.notify(
             title="Message from BI-Tech",
@@ -1794,7 +1772,7 @@ class MainProgram(QWidget):
 
     def show_label_selector(self):
         self.label_selector = LabelSelectorDialog(self, self.username)
-        self.label_selector.exec_()  # 这会显示标签选择器并等待用户关闭它
+        self.label_selector.exec_()  
 
     def toggle_vote_dialog(self, state):
         if state == Qt.Checked:
@@ -1803,13 +1781,11 @@ class MainProgram(QWidget):
             self.vote_timer.stop()
 
     def logout(self):
-        # Hide the main program
+
         self.hide()
 
-        # Show the login dialog
         self.show_login_dialog()
 
-        # Show the main program again when login is successful
         self.show()
 
     def report(self):
@@ -1829,7 +1805,6 @@ class MainWindow(QMainWindow):
 
         self.setWindowIcon(QIcon('Fig/B.ico'))
 
-        # Set the background color of the window
         self.setStyleSheet("""
             QMainWindow {
                 background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #344955, stop:1 #4A6572);
