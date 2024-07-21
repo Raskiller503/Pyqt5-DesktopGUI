@@ -6,8 +6,24 @@ This is a desktop application based on the PyQt5 library, designed for energy ma
 
 ### Main Window
 ![Main Window](Image/2.png)
-- Displays measurement data (Form 3 aspects/ Thermal condition/ Health condition / Energy condition ) and machine learning prediction results
-- Allows users to change tags and report energy-saving information
+The main window provides a comprehensive overview of the office environment, focusing on three key aspects:
+
+1. **Thermal Condition**
+   - Displays real-time temperature, humidity, and mean radiant temperature
+   - Shows thermal comfort predictions based on the PMV model
+
+2. **Health Condition**
+   - Monitors and displays indicators related to occupant health
+   - Includes metrics such as CO2 levels and air quality index
+
+3. **Energy Condition**
+   - Presents current energy consumption data
+   - Displays energy-saving recommendations and predictions
+
+Additional features:
+- Machine learning prediction results for energy consumption
+- User-friendly interface for changing tags and reporting energy-saving actions
+- Interactive elements for detailed data exploration
 
 ### Login Window
 ![Login Window 1](Image/00.png)
