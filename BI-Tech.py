@@ -95,7 +95,6 @@ class InfoModule(QWidget):
         self.value.setText(new_value)
 
     def mousePressEvent(self, event):
-        # 当 InfoModule 被点击时，调用 main_program 的 show_trend_chart 函数
         self.main_program.show_trend_chart(self.label_name)
         super().mousePressEvent(event)
 
@@ -219,7 +218,6 @@ class GifDialog(QDialog):
         layout.addWidget(self.gif_label)
         self.setLayout(layout)
 
-        # Set up a timer to close the dialog after 10 seconds
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.close)
         self.timer.start(10000)  # 10 seconds in milliseconds
@@ -228,7 +226,6 @@ class ImageDialog(QDialog):
     def __init__(self, parent=None):
         super(ImageDialog, self).__init__(parent)
         self.setWindowTitle("システムの位置")
-        # Set up the image label
         self.image_label = QLabel(self)
         pixmap = QPixmap('Fig/background_6.png')  # Add the path to your image here
         self.image_label.setPixmap(pixmap)
@@ -246,9 +243,9 @@ class ImageDialog(QDialog):
 
 
 MYSQL_USER = 'root'
-MYSQL_PASSWORD = 'chenyutong'
+MYSQL_PASSWORD = '##########'
 MYSQL_HOST = '127.0.0.1'
-MYSQL_DATABASE = 'BI_Tech'
+MYSQL_DATABASE = '#########'
 MYSQL_PORT = 3306
 
 
