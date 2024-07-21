@@ -10,7 +10,7 @@ This is a desktop application based on the PyQt5 library, designed for energy ma
 - Allows users to change tags and report energy-saving information
 
 ### Login Window
-![Login Window 1](Image/0.png) ![Login Window 2](Image/01.png)
+![Login Window 1](Image/00.png)
 - User account sign-in functionality
 - Option to change device location near user's seat
 
