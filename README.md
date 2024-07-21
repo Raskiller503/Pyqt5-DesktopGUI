@@ -11,4 +11,4 @@ Users in the window could sign in account and change the device location where n
 ![funtion1](Image/01.png)
 ## Vote & tag change
 Users could choose the tag which they most like to accquire. After changeing the window will also revise.
-![funtion1](Image/tag2.png)
+![funtion1](Image/v.png)
