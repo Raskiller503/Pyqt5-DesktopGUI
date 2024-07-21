@@ -1,0 +1,12 @@
+PyQt5
+paho-mqtt
+psutil
+pandas
+numpy
+scikit-learn
+requests
+pynput
+pycaw
+plyer
+matplotlib
+pymysql
