@@ -1,7 +1,7 @@
 # Pyqt5-MonitorGUI
 This is a desktop App based on PyQt5 library.
 # Main window
-This is the main window of App. This window shows the measuremnt data and machine learning result.//
+This is the main window of App. This window shows the measuremnt data and machine learning result.
 Uses could also change the tag and report their energy-saving information via mainwindow.
 ![funtion1](Image/2.png)
 ## Login window
