@@ -29,16 +29,22 @@ The current thermal comfort model is based on Professor Fanger's PMV model from 
 
 ## Installation
 
-[Add installation instructions here]
+To set up and run this project, follow these steps:
 
-## Usage
+1. Clone the repository:git clone https://github.com/Raskiller503/Pyqt5-DesktopGUI.git
+cd Pyqt5-DesktopGUI
+2. Ensure you have Python 3.7 or higher installed on your system.
+3. Install the required dependencies:
+pip install -r requirements.txt
+This will install all necessary libraries including PyQt5.
+4. Set up the MySQL database:
+- Install MySQL if not already installed
+- Create a new database for the project
+- Update the database connection settings in the configuration file (if applicable)
 
-[Add usage instructions here]
-
-## Contributing
-
-[Add contribution guidelines here]
+5. Run the application:
+python main.py
 
 ## License
-
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
