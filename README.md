@@ -6,7 +6,7 @@ This is a desktop application based on the PyQt5 library, designed for energy ma
 
 ### Main Window
 ![Main Window](Image/2.png)
-- Displays measurement data and machine learning results
+- Displays measurement data (Form 3 aspects/ Thermal condition/ Health condition / Energy condition ) and machine learning prediction results
 - Allows users to change tags and report energy-saving information
 
 ### Login Window
