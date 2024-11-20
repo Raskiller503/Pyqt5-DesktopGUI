@@ -2,7 +2,7 @@
 
 This is a desktop application based on the PyQt5 library, designed for energy management and thermal comfort monitoring in office buildings.
 
-## Features
+## Application overview
 
 ### Main Window
 ![Main Window](Image/2.png)
