@@ -1,4 +1,4 @@
-# Pyqt5-MonitorGUI
+# Desktop Application based on Pyqt5 library
 
 This is a desktop application based on the PyQt5 library, designed for energy management and thermal comfort monitoring in office buildings.
 
