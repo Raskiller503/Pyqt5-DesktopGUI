@@ -54,7 +54,9 @@ cd Pyqt5-DesktopGUI
 ```
 2. Ensure you have Python 3.7 or higher installed on your system.
 3. Install the required dependencies:
+```bash
 pip install -r requirements.txt
+```
 This will install all necessary libraries including PyQt5.
 4. Set up the MySQL database:
 - Install MySQL if not already installed
@@ -62,8 +64,20 @@ This will install all necessary libraries including PyQt5.
 - Update the database connection settings in the configuration file (if applicable)
 
 5. Run the application:
+```bash
 python main.py
+```
+### Packaging BI-Tech Application
 
+ **Install PyInstaller**:  
+   Make sure PyInstaller is installed to package the application. You can install it via pip:
+
+```bash
+   pip install pyinstaller
+   pyinstaller BI-Tech.spec
+```
+
+   
 ## 3. License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
