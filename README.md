@@ -49,7 +49,7 @@ To set up and run this project, follow these steps:
 
 1. Clone the repository:
 ```bash
-   bashgit clone https://github.com/Raskiller503/Pyqt5-DesktopGUI.git
+   git clone https://github.com/Raskiller503/Pyqt5-DesktopGUI.git
 cd Pyqt5-DesktopGUI
 ```
 2. Ensure you have Python 3.7 or higher installed on your system.
