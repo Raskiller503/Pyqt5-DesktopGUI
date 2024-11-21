@@ -47,8 +47,11 @@ The current thermal comfort model is based on Professor Fanger's PMV model from 
 
 To set up and run this project, follow these steps:
 
-1. Clone the repository:git clone https://github.com/Raskiller503/Pyqt5-DesktopGUI.git
+1. Clone the repository:
+```bash
+   bashgit clone https://github.com/Raskiller503/Pyqt5-DesktopGUI.git
 cd Pyqt5-DesktopGUI
+```
 2. Ensure you have Python 3.7 or higher installed on your system.
 3. Install the required dependencies:
 pip install -r requirements.txt
