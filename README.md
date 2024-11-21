@@ -52,12 +52,12 @@ To set up and run this project, follow these steps:
    git clone https://github.com/Raskiller503/Pyqt5-DesktopGUI.git
 cd Pyqt5-DesktopGUI
 ```
-2. Ensure you have Python 3.7 or higher installed on your system.
+2. Ensure you have **Python 3.7** or higher installed on your system.
 3. Install the required dependencies:
 ```bash
-pip install -r requirements.txt
+   pip install -r requirements.txt
 ```
-This will install all necessary libraries including PyQt5.
+This will install all necessary libraries including **PyQt5**.
 4. Set up the MySQL database:
 - Install MySQL if not already installed
 - Create a new database for the project
@@ -65,7 +65,7 @@ This will install all necessary libraries including PyQt5.
 
 5. Run the application:
 ```bash
-python main.py
+   python main.py
 ```
 ### Packaging BI-Tech Application
 
