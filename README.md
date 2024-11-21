@@ -57,7 +57,7 @@ cd Pyqt5-DesktopGUI
 ```bash
    pip install -r requirements.txt
 ```
-This will install all necessary libraries including **PyQt5**.
+This will install all necessary libraries including **PyQt5**.\
 4. Set up the MySQL database:
 - Install MySQL if not already installed
 - Create a new database for the project
