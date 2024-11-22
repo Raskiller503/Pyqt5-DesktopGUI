@@ -1,6 +1,11 @@
 # Desktop Application based on Pyqt5 library
 
-This is a desktop application based on the PyQt5 library, designed for energy management and thermal comfort monitoring in office buildings.
+This is a desktop application based on the PyQt5 library, designed for energy management and thermal comfort monitoring in office buildings.\
+An IoT based BI-Tech(Behavioral Insight X Technology) platform.
+
+<div align=center>
+<img src="Image/BI-Tech.gif" width="200" > 
+</div>
 
 ## 1. Application overview
 
